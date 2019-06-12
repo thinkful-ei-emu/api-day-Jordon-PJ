@@ -73,6 +73,10 @@ const shoppingList = (function(){
         .then((newItem) => {
           store.addItem(newItem);
           render();
+        })
+        .catch(err => {
+          store.projectError(err.message);
+          render();
         });
     });
   }
@@ -112,10 +116,11 @@ const shoppingList = (function(){
       api.updateItem(id, {name: itemName})
         .then(res => res.json())
         .then(data => {
-          console.log(data);
+          // console.log(data);
           store.findAndUpdate(id, {name: itemName});
           render();
-        });
+        })
+        .catch(e => console.log(e.message));
       // store.findAndUpdateName(id, itemName);
       store.setItemIsEditing(id, false);
       render();

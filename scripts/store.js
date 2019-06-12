@@ -15,10 +15,10 @@ const store = (function(){
     Object.assign(this.items.find(item => item.id === id), newData);
   };
 
-  // const findAndToggleChecked = function(id) {
-  //   const item = this.findById(id);
-  //   item.checked = !item.checked;
-  // };
+  const findAndToggleChecked = function(id) {
+    const item = this.findById(id);
+    item.checked = !item.checked;
+  };
 
   const findAndDelete = function(id) {
     this.items = this.items.filter(item => item.id !== id);
@@ -47,6 +47,10 @@ const store = (function(){
     this.searchTerm = term;
   };
 
+  const projectError = function(err){
+    console.log(err.message);
+  };
+
   return {
     items: [],
     hideCheckedItems: false,
@@ -59,6 +63,7 @@ const store = (function(){
     toggleCheckedFilter,
     setSearchTerm,
     setItemIsEditing,
+    projectError
   };
   
 }());

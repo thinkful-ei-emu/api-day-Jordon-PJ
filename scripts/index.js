@@ -9,7 +9,7 @@ $(document).ready(function() {
     .then(res => res.json())
     .then((items) => {
       items.forEach((item) => store.addItem(item));
-      console.log(store);
+      // console.log(store);
       shoppingList.render();
     });
 
