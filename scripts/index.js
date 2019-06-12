@@ -5,13 +5,21 @@ $(document).ready(function() {
   shoppingList.bindEventListeners();
   shoppingList.render();
 
+  // api.getItems()
+  //   .then(res => res.json())
+  //   .then((items) => {
+  //     items.forEach((item) => store.addItem(item));
+  //     // console.log(store);
+  //     shoppingList.render();
+
   api.getItems()
     .then(res => res.json())
     .then((items) => {
-      items.forEach((item) => store.addItem(item));
-      // console.log(store);
-      shoppingList.render();
-    });
+      const item = items[0];
+      return api.updateItem(item.id, { name: 'foobar' });
+    })
+    .then(res => res.json())
+    .then(() => console.log('updated!'));
 });
 
 
