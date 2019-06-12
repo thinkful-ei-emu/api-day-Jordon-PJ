@@ -12,9 +12,10 @@ const api = (function(){
     let newItem = JSON.stringify({
       name,
     });
+    console.log(newItem);
     return fetch(`${BASE_URL}/items`, {
       method: 'POST',
-      header: new Headers({'Content-Type' : 'application/json'}),
+      headers: new Headers({'Content-Type' : 'application/json'}),
       body: newItem
     });
   };
@@ -27,5 +28,13 @@ const api = (function(){
     }); 
   };
 
-  return {getItems, createItem, updateItem};
+  const deleteItem = function(id){
+    return fetch(`${BASE_URL}/items/${id}`, {
+      method: 'DELETE',
+      headers: new Headers({'Content-Type' : 'application/json'})
+    });
+  };
+
+
+  return {getItems, createItem, updateItem, deleteItem};
 }());

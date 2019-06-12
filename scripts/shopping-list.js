@@ -68,14 +68,12 @@ const shoppingList = (function(){
       const newItemName = $('.js-shopping-list-entry').val();
       $('.js-shopping-list-entry').val('');
       // calling api to add item into but item is listed as "undefined"
-      const newLocal = api.createItem(newItemName)
+      api.createItem(newItemName)
         .then(res => res.json())
         .then((newItem) => {
           store.addItem(newItem);
           render();
         });
-      store.addItem(newLocal);
-      render();
     });
   }
   
@@ -110,7 +108,15 @@ const shoppingList = (function(){
       event.preventDefault();
       const id = getItemIdFromElement(event.currentTarget);
       const itemName = $(event.currentTarget).find('.shopping-item').val();
-      store.findAndUpdateName(id, itemName);
+      console.log(itemName);
+      api.updateItem(id, {name: itemName})
+        .then(res => res.json())
+        .then(data => {
+          console.log(data);
+          store.findAndUpdate(id, {name: itemName});
+          render();
+        });
+      // store.findAndUpdateName(id, itemName);
       store.setItemIsEditing(id, false);
       render();
     });

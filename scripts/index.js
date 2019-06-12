@@ -5,21 +5,24 @@ $(document).ready(function() {
   shoppingList.bindEventListeners();
   shoppingList.render();
 
-  // api.getItems()
-  //   .then(res => res.json())
-  //   .then((items) => {
-  //     items.forEach((item) => store.addItem(item));
-  //     // console.log(store);
-  //     shoppingList.render();
-
   api.getItems()
     .then(res => res.json())
     .then((items) => {
-      const item = items[0];
-      return api.updateItem(item.id, { name: 'foobar' });
-    })
-    .then(res => res.json())
-    .then(() => console.log('updated!'));
+      items.forEach((item) => store.addItem(item));
+      console.log(store);
+      shoppingList.render();
+    });
+
+    
+  // api.getItems()
+  //   .then(res => res.json())
+  //   .then((items) => {
+  //     const item = store.items[0];
+  //     console.log('current name: ' + item.name);
+  //     store.findAndUpdate(item.id, { name: 'foobar' });
+  //     console.log('new name: ' + item.name);
+  //   })
+  //   .then(() => console.log('updated!'));
 });
 
 
@@ -29,7 +32,7 @@ $(document).ready(function() {
 
 
 
-store.items.push(Item.create('apples'));
+// store.items.push(Item.create('apples'));
 
 
 
