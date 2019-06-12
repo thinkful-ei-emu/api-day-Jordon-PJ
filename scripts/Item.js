@@ -14,7 +14,7 @@ const Item = (function(){
       name,
       checked: false
     };
-  };
+  }; 
 
   return {
     validateName,
